@@ -7,10 +7,7 @@ const MainPage = () => {
 	useEffect(() => {
 		axios
 			.get(apiUrl)
-			.then(res => {
-				setArticles(res.data.hits);
-				console.log(res.data.hits);
-			})
+			.then(res => setArticles(res.data.hits))
 			.catch(err => console.error(err));
 	}, [setArticles]);
 
@@ -20,11 +17,13 @@ const MainPage = () => {
 				articles.map(article => (
 					<>
 						<h2 key={`headline_${article.objectID}`}>
-							{article.title}
+							{console.log(article)}
+							{"(" + article.created_at + ") " + article.title}
 						</h2>
 						<a key={`url_${article.objectID}`} href={article.url}>
 							{article.url}
 						</a>
+						<hr />
 					</>
 				))
 			) : (
