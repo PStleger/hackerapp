@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import SearchComponent from "./SearchComponent";
 
 const MainPage = () => {
-	const storyUrl = "http://hn.algolia.com/api/v1/search_by_date?tags=story";
-	const searchUrl =
+	const apiUrl =
 		"http://hn.algolia.com/api/v1/search_by_date?query=<QUERY>&tags=story";
 	const [articles, setArticles] = useState(null);
 
 	useEffect(() => {
 		axios
-			.get(storyUrl)
+			.get(apiUrl.replace("<QUERY", ""))
 			.then(res => setArticles(res.data.hits))
 			.catch(err => console.error(err));
 	}, [setArticles]);
@@ -19,7 +18,7 @@ const MainPage = () => {
 		event.preventDefault();
 		const searchString = event.target.search.value;
 		axios
-			.get(searchUrl.replace("<QUERY>", searchString.toLowerCase()))
+			.get(apiUrl.replace("<QUERY>", searchString.toLowerCase()))
 			.then(res => setArticles(res.data.hits))
 			.catch(err => console.error(err));
 	};
