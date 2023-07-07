@@ -8,9 +8,10 @@ const Mainpage = () => {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const apiUrl = "http://hn.algolia.com/api/v1/search?query=react&tags=story";
+  const searchString = event.target.search.value;
 
   useEffect(() => {
-    fetch(apiUrl)
+    fetch(apiUrl.replace("<QUERY>", searchString.toLowerCase()))
       .then((response) => {
         return response.json();
       })
