@@ -33,7 +33,12 @@ const MainPage = () => {
 						<h2 key={`headline_${article.objectID}`}>
 							{"(" + article.created_at + ") " + article.title}
 						</h2>
-						<a key={`url_${article.objectID}`} href={article.url}>
+						<a
+							key={`url_${article.objectID}`}
+							href={article.url}
+							target="_blank"
+							rel="noreferrer"
+						>
 							{article.url}
 						</a>
 						<hr />
